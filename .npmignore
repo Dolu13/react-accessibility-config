@@ -1,0 +1,13 @@
+src/
+examples/
+.storybook/
+**/*.test.*
+**/*.spec.*
+vitest.config.ts
+tsconfig.json
+vite.config.ts
+eslint.config.js
+.env*
+.git*
+coverage/
+node_modules/
