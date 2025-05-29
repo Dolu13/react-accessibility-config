@@ -1,8 +1,7 @@
 import { CSSProperties } from 'react';
 
 export interface MaterialStyles {
-  fab: CSSProperties;
-  fabHover: CSSProperties;
+  textLink: CSSProperties;
   overlay: CSSProperties;
   dialog: CSSProperties;
   dialogTitle: CSSProperties;
@@ -25,30 +24,21 @@ export interface MaterialStyles {
 }
 
 export const materialStyles: MaterialStyles = {
-  fab: {
+  textLink: {
     position: 'fixed',
-    top: '16px',
-    right: '16px',
-    zIndex: 1000,
-    width: '56px',
-    height: '56px',
-    borderRadius: '50%',
-    backgroundColor: '#1976d2',
-    color: 'white',
-    border: 'none',
+    color: '#1976d2',
+    textDecoration: 'underline',
     cursor: 'pointer',
-    boxShadow: '0px 3px 5px -1px rgba(0,0,0,0.2), 0px 6px 10px 0px rgba(0,0,0,0.14), 0px 1px 18px 0px rgba(0,0,0,0.12)',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    fontSize: '24px',
-    transition: 'all 0.2s ease-in-out',
-    fontFamily: '"Roboto","Helvetica","Arial",sans-serif'
-  },
-  fabHover: {
-    backgroundColor: '#1565c0',
-    transform: 'scale(1.1)',
-    boxShadow: '0px 5px 5px -3px rgba(0,0,0,0.2), 0px 8px 10px 1px rgba(0,0,0,0.14), 0px 3px 14px 2px rgba(0,0,0,0.12)'
+    zIndex: 1000,
+    backgroundColor: 'transparent',
+    border: 'none',
+    padding: '8px',
+    fontSize: '14px',
+    fontFamily: 'Arial, sans-serif',
+    transition: 'color 0.3s',
+    '&:hover': {
+      color: '#1565c0'
+    }
   },
   overlay: {
     position: 'fixed',

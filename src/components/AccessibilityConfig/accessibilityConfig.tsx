@@ -7,14 +7,12 @@ import { useAccessibilityStyles } from '../../hooks/useAccessibilityStyles';
 const AccessibilityConfig: React.FC<AccessibilityConfigProps> = ({
   isOpen = false,
   onToggle,
-  className = '',
   position = 'top-right',
   customStyles = {},
   defaultSettings = {},
   onSettingsChange = () => {}
 }) => {
   const { settings, updateSettings, resetSettings } = useAccessibilitySettings(defaultSettings);
-  const [hoveredFab, setHoveredFab] = useState(false);
   const [hoveredClose, setHoveredClose] = useState(false);
 
   useAccessibilityStyles(settings);
@@ -30,8 +28,8 @@ const AccessibilityConfig: React.FC<AccessibilityConfigProps> = ({
   };
 
   
-  // Fonction utilitaire pour la position du FAB
-  const getFabPosition = (position: string): React.CSSProperties => {
+  // Fonction utilitaire pour la position du lien texte
+  const getTextPosition = (position: string): React.CSSProperties => {
     const positions: Record<string, React.CSSProperties> = {
       'top-right': { top: '16px', right: '16px' },
       'top-left': { top: '16px', left: '16px' },
@@ -77,10 +75,9 @@ const AccessibilityConfig: React.FC<AccessibilityConfigProps> = ({
   const styles = {
     ...materialStyles,
     ...customStyles,
-    fab: {
-      ...materialStyles.fab,
-      ...getFabPosition(position),
-      ...customStyles.fab
+    textLink: {
+      ...getTextPosition(position),
+      ...customStyles.link
     }
   };
 
@@ -88,18 +85,17 @@ const AccessibilityConfig: React.FC<AccessibilityConfigProps> = ({
   if (!isOpen) {
     return (
       <a
-        style={{
-          ...styles.fab,
-          ...(hoveredFab ? styles.fabHover : {})
-        }}
-        onMouseEnter={() => setHoveredFab(true)}
-        onMouseLeave={() => setHoveredFab(false)}
-        onClick={onToggle}
-        aria-label="Ouvrir les paramètres d'accessibilité"
-        title="Paramètres d'accessibilité"
-        className={className}
+      href="#"
+      style={styles.textLink}
+      onClick={(e) => {
+        e.preventDefault();
+        onToggle();
+      }}
+      aria-label="Paramètres d'accessibilité"
+      aria-expanded={isOpen}
+      aria-controls="accessibility-dialog"
       >
-        paramètres d'accessibilité
+        Paramètres d'accessibilité
       </a>
     );
   }

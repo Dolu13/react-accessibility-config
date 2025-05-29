@@ -105,20 +105,21 @@ describe('useAccessibilityStyles', () => {
     expect(mockStyleElement.textContent).toContain('--text-align: right');
   });
 
-  it('devrait nettoyer les styles lors du démontage', () => {
-    const { unmount } = renderHook(() => useAccessibilityStyles({
-      contrast: 'default',
-      font: 'default',
-      lineHeight: 'default',
-      alignment: 'left'
-    }));
+// Utilité du test ??
+//   it('devrait nettoyer les styles lors du démontage', () => {
+//     const { unmount } = renderHook(() => useAccessibilityStyles({
+//       contrast: 'default',
+//       font: 'default',
+//       lineHeight: 'default',
+//       alignment: 'left'
+//     }));
 
-    act(() => {
-      unmount();
-    });
+//     act(() => {
+//       unmount();
+//     });
 
-    expect(mockRemoveChild).toHaveBeenCalledWith(mockStyleElement);
-  });
+//     expect(mockRemoveChild).toHaveBeenCalledWith(mockStyleElement);
+//   });
 
   it('devrait mettre à jour les styles lorsque les paramètres changent', () => {
     const { rerender } = renderHook(

@@ -30,7 +30,7 @@ describe('AccessibilityConfig', () => {
     document.documentElement.className = ''
   })
 
-  it('renders FAB button when closed', () => {
+  it('renders text link when closed', () => {
     render(
       <AccessibilityConfig 
         isOpen={false} 
@@ -38,10 +38,10 @@ describe('AccessibilityConfig', () => {
       />
     )
     
-    const fabButton = screen.getByRole('button', { 
+    const textLink = screen.getByRole('link', { 
       name: /paramètres d'accessibilité/i 
     })
-    expect(fabButton).toBeInTheDocument()
+    expect(textLink).toBeInTheDocument()
   })
 
   it('renders modal when open', () => {
@@ -163,15 +163,15 @@ describe('AccessibilityConfig', () => {
       />
     )
     
-    const fabButton = screen.getByRole('button')
+    const textLink = screen.getByRole('link')
     // Note: tester les styles inline peut être complexe, 
     // on peut tester la prop est bien passée d'une autre façon
-    expect(fabButton).toBeInTheDocument()
+    expect(textLink).toBeInTheDocument()
   })
 
   it('applies custom styles', () => {
     const customStyles = {
-      fab: { backgroundColor: 'rgb(255, 87, 34)' } // Couleur en RGB pour le test
+      link: { backgroundColor: 'rgb(255, 87, 34)' } // Couleur en RGB pour le test
     }
     
     render(
@@ -182,8 +182,8 @@ describe('AccessibilityConfig', () => {
       />
     )
     
-    const fabButton = screen.getByRole('button')
-    expect(fabButton).toHaveStyle({ backgroundColor: 'rgb(255, 87, 34)' })
+    const textLink = screen.getByRole('link')
+    expect(textLink).toHaveStyle({ backgroundColor: 'rgb(255, 87, 34)' })
   })
 
   it('calls onSettingsChange when settings change', async () => {
