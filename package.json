@@ -1,6 +1,6 @@
 {
   "name": "@dolu13/react-accessibility-config",
-  "version": "1.0.4",
+  "version": "1.0.6",
   "description": "Composant React réutilisable pour les personnaliser l'accessibilité avec style Material-UI",
   "type": "commonjs",
   "main": "dist/index.js",

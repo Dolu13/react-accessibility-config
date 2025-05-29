@@ -84,10 +84,10 @@ const AccessibilityConfig: React.FC<AccessibilityConfigProps> = ({
     }
   };
 
-  // Bouton flottant quand fermé
+  // bouton d'ouverture de la modale
   if (!isOpen) {
     return (
-      <button
+      <a
         style={{
           ...styles.fab,
           ...(hoveredFab ? styles.fabHover : {})
@@ -99,8 +99,8 @@ const AccessibilityConfig: React.FC<AccessibilityConfigProps> = ({
         title="Paramètres d'accessibilité"
         className={className}
       >
-        ⚙️
-      </button>
+        paramètres d'accessibilité
+      </a>
     );
   }
 
