@@ -115,7 +115,7 @@ function App() {
         defaultSettings={settings}
         onSettingsChange={handleSettingsChange}
         customStyles={{
-          textLink: {
+          textLink: { // libelle du bouton d'ouverture de la modale
             position: 'fixed'
           }
         }}
