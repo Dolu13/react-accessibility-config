@@ -98,7 +98,8 @@ const AccessibilityConfig: React.FC<AccessibilityConfigProps> = ({
     >
       Paramètres d'accessibilité
     </a>
-    <div style={styles.overlay} onClick={(e) => e.target === e.currentTarget && onToggle()}>
+    {isOpen && (
+      <div style={styles.overlay} onClick={(e) => e.target === e.currentTarget && onToggle()}>
         <div style={styles.dialog} role="dialog" aria-labelledby="accessibility-dialog-title">
           <div style={styles.dialogTitle}>
             <h2 id="accessibility-dialog-title" style={styles.titleContent}>
@@ -205,7 +206,9 @@ const AccessibilityConfig: React.FC<AccessibilityConfigProps> = ({
             </button>
           </div>
         </div>
-      </div></>
+      </div>
+    )}
+    </>
   );
 };
 
