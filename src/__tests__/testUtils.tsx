@@ -1,4 +1,4 @@
-import { ReactElement } from 'react'
+import React, { ReactElement } from 'react'
 import { render, RenderOptions, RenderResult } from '@testing-library/react'
 
 const AllTheProviders = ({ children }: { children: React.ReactNode }) => {

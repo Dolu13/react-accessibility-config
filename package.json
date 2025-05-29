@@ -1,16 +1,16 @@
 {
   "name": "@dolu13/react-accessibility-config",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "description": "Composant React réutilisable pour les personnaliser l'accessibilité avec style Material-UI",
-  "type": "module",
-  "main": "dist/index.cjs",
+  "type": "commonjs",
+  "main": "dist/index.js",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
-      "require": "./dist/index.cjs"
+      "require": "./dist/index.js"
     },
     "./styles": {
       "import": "./dist/style.css",
@@ -21,9 +21,18 @@
     "dist",
     "README.md"
   ],
+  "typesVersions": {
+    "*": {
+      "*": [
+        "dist/index.d.ts"
+      ]
+    }
+  },
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "clean": "rimraf dist",
+    "build": "tsc -p tsconfig.build.json",
+    "build:types": "tsc --emitDeclarationOnly --outDir dist",
     "build:watch": "vite build --watch",
     "Preview": "vite preview",
     "prepare": "npm run build",
@@ -49,12 +58,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/dolu13/react-accessibility-config.git"
+    "url": "https://github.com/Dolu13/react-accessibility-config.git"
   },
   "bugs": {
-    "url": "https://github.com/dolu13/react-accessibility-config/issues"
+    "url": "https://github.com/Dolu13/react-accessibility-config/issues"
   },
-  "homepage": "https://github.com/dolu13/react-accessibility-config#readme",
+  "homepage": "https://github.com/Dolu13/react-accessibility-config#readme",
   "peerDependencies": {
     "react": ">=18.0.0",
     "react-dom": ">=18.0.0"
@@ -75,9 +84,11 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.5",
     "jsdom": "^23.0.0",
-    "typescript": "^5.2.0",
+    "typescript": "^5.4.5",
     "vite": "^6.3.5",
-    "vite-plugin-dts": "^3.6.0",
     "vitest": "^1.0.0"
+  },
+  "dependencies": {
+    "vite-plugin-dts": "^4.5.4"
   }
 }

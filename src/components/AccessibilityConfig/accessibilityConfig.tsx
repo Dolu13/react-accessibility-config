@@ -1,7 +1,8 @@
-import { useState } from 'react';
-import { useAccessibilitySettings } from '@/hooks/useAccessibilitySettings';
+import React, { useState } from 'react';
+import { useAccessibilitySettings } from '../../hooks/useAccessibilitySettings';
 import { materialStyles } from './styles';
-import type { AccessibilityConfigProps } from '@/types';
+import type { AccessibilityConfigProps } from '../../types';
+import { useAccessibilityStyles } from '../../hooks/useAccessibilityStyles';
 
 const AccessibilityConfig: React.FC<AccessibilityConfigProps> = ({
   isOpen = false,
@@ -16,6 +17,8 @@ const AccessibilityConfig: React.FC<AccessibilityConfigProps> = ({
   const [hoveredFab, setHoveredFab] = useState(false);
   const [hoveredClose, setHoveredClose] = useState(false);
 
+  useAccessibilityStyles(settings);
+
   const handleSettingChange = (category: keyof typeof settings, value: string) => {
     updateSettings(category, value);
     onSettingsChange({ ...settings, [category]: value });
@@ -24,6 +27,18 @@ const AccessibilityConfig: React.FC<AccessibilityConfigProps> = ({
   const handleReset = () => {
     resetSettings();
     onSettingsChange(defaultSettings as any);
+  };
+
+  
+  // Fonction utilitaire pour la position du FAB
+  const getFabPosition = (position: string): React.CSSProperties => {
+    const positions: Record<string, React.CSSProperties> = {
+      'top-right': { top: '16px', right: '16px' },
+      'top-left': { top: '16px', left: '16px' },
+      'bottom-right': { bottom: '16px', right: '16px' },
+      'bottom-left': { bottom: '16px', left: '16px' }
+    };
+    return positions[position] || positions['top-right'];
   };
 
   // Configuration des options
@@ -200,17 +215,6 @@ const AccessibilityConfig: React.FC<AccessibilityConfigProps> = ({
       </div>
     </div>
   );
-};
-
-// Fonction utilitaire pour la position du FAB
-const getFabPosition = (position: string): React.CSSProperties => {
-  const positions: Record<string, React.CSSProperties> = {
-    'top-right': { top: '16px', right: '16px' },
-    'top-left': { top: '16px', left: '16px' },
-    'bottom-right': { bottom: '16px', right: '16px' },
-    'bottom-left': { bottom: '16px', left: '16px' }
-  };
-  return positions[position] || positions['top-right'];
 };
 
 export default AccessibilityConfig;

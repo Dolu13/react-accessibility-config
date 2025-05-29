@@ -1,46 +1,58 @@
-# React Accessibility Config
+ # React Accessibility Config
 
 Une bibliothèque React pour gérer facilement les paramètres d'accessibilité dans vos applications web.
 
 ## 🚀 Fonctionnalités
 
-- Configuration des contrastes
-- Adaptation de la police pour la dyslexie
+- Configuration des contrastes (défaut, renforcé, inversé)
+- Adaptation de la police pour la dyslexie (OpenDyslexic)
 - Ajustement de l'interlignage
 - Personnalisation de l'alignement
 - Interface utilisateur intuitive et accessible
 - Thème personnalisable
 - Support complet des tests
+- Application automatique des styles d'accessibilité
 
 ## 📦 Installation
 
 ```bash
-npm install @votre-organisation/react-accessibility-config
+npm install @dolu13/react-accessibility-config
 ```
 
 ## 🎯 Utilisation
 
 ```tsx
-import { AccessibilityConfig } from '@votre-organisation/react-accessibility-config';
+import React, { useState } from 'react';
+import { AccessibilityConfig } from '@dolu13/react-accessibility-config';
+import '@dolu13/react-accessibility-config/styles';
 
 function App() {
+  const [isOpen, setIsOpen] = useState(false);
+  const [settings, setSettings] = useState({
+    contrast: 'default',
+    font: 'default',
+    lineHeight: 'default',
+    alignment: 'left'
+  });
+
+  const handleSettingsChange = (newSettings) => {
+    console.log('Nouveaux paramètres:', newSettings);
+    setSettings(newSettings);
+  };
+
   return (
     <div>
       <h1>Mon Application</h1>
+      <p>Ceci est un exemple de texte pour tester les paramètres d'accessibilité.</p>
+      <a href="#">Ceci est un lien</a>
+      
       <AccessibilityConfig
-        isOpen={false}
-        onToggle={() => {}}
+        isOpen={isOpen}
+        onToggle={() => setIsOpen(!isOpen)}
         position="top-right"
         theme="default"
-        defaultSettings={{
-          contrast: 'default',
-          font: 'default',
-          lineHeight: 'default',
-          alignment: 'left'
-        }}
-        onSettingsChange={(settings) => {
-          console.log('Nouveaux paramètres:', settings);
-        }}
+        defaultSettings={settings}
+        onSettingsChange={handleSettingsChange}
       />
     </div>
   );
@@ -55,10 +67,63 @@ function App() {
 | `onToggle` | `() => void` | Requis | Fonction appelée lors du clic sur le bouton |
 | `className` | `string` | `''` | Classe CSS personnalisée |
 | `position` | `'top-right' \| 'top-left' \| 'bottom-right' \| 'bottom-left'` | `'top-right'` | Position du bouton de configuration |
-| `theme` | `string` | `'default'` | Thème de l'interface |
-| `customStyles` | `object` | `{}` | Styles personnalisés |
-| `defaultSettings` | `object` | `{}` | Paramètres par défaut |
-| `onSettingsChange` | `(settings: object) => void` | `() => {}` | Callback lors du changement des paramètres |
+| `theme` | `'default' \| 'dark' \| 'light'` | `'default'` | Thème de l'interface |
+| `customStyles` | `Record<string, React.CSSProperties>` | `{}` | Styles personnalisés |
+| `defaultSettings` | `AccessibilitySettings` | `{}` | Paramètres par défaut |
+| `onSettingsChange` | `(settings: AccessibilitySettings) => void` | `() => {}` | Callback lors du changement des paramètres |
+
+## 📋 Types
+
+```typescript
+interface AccessibilitySettings {
+  contrast: 'default' | 'high' | 'inverted';
+  font: 'default' | 'dyslexic';
+  lineHeight: 'default' | 'increased';
+  alignment: 'left' | 'right';
+}
+```
+
+## 🎨 Personnalisation avancée
+
+```tsx
+import React, { useState } from 'react';
+import { AccessibilityConfig } from '@dolu13/react-accessibility-config';
+import '@dolu13/react-accessibility-config/styles';
+
+function App() {
+  const [isOpen, setIsOpen] = useState(false);
+  const [settings, setSettings] = useState({
+    contrast: 'default',
+    font: 'default',
+    lineHeight: 'default',
+    alignment: 'left'
+  });
+
+  const handleSettingsChange = (newSettings) => {
+    setSettings(newSettings);
+    // Sauvegarder les paramètres dans le localStorage
+    localStorage.setItem('accessibilitySettings', JSON.stringify(newSettings));
+  };
+
+  return (
+    <div>
+      <AccessibilityConfig
+        isOpen={isOpen}
+        onToggle={() => setIsOpen(!isOpen)}
+        position="bottom-right"
+        theme="dark"
+        defaultSettings={settings}
+        onSettingsChange={handleSettingsChange}
+        customStyles={{
+          fab: {
+            backgroundColor: '#1976d2'
+          }
+        }}
+      />
+    </div>
+  );
+}
+```
 
 ## 🧪 Tests
 
@@ -87,10 +152,11 @@ npm run build
 
 MIT
 
-## 🤝 Contribution
+## 👥 Auteur
 
-Les contributions sont les bienvenues ! N'hésitez pas à ouvrir une issue ou une pull request.
+Demol Ludovic <ldemol@norsys.fr>
 
-## 📚 Documentation
+## 🔗 Liens
 
-Pour plus d'informations, consultez notre [documentation complète](./docs/README.md).
+- [GitHub](https://github.com/Dolu13/react-accessibility-config)
+- [Issues](https://github.com/Dolu13/react-accessibility-config/issues)

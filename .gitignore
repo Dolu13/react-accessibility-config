@@ -1,4 +1,3 @@
-# Logs
 logs
 *.log
 npm-debug.log*
@@ -12,7 +11,6 @@ dist
 dist-ssr
 *.local
 
-# Editor directories and files
 .vscode/*
 !.vscode/extensions.json
 .idea
@@ -28,81 +26,63 @@ coverage/
 .DS_Store
 *.log
 
-# 📄 .gitignore pour module React TypeScript avec Vite
+dist/
+dist-ssr/
+*.tgz
+build/
 
-# === BUILD ET DISTRIBUTION ===
-dist/                    # Build de production
-dist-ssr/               # Build SSR si applicable
-*.tgz                   # Packages npm générés par 'npm pack'
-build/                  # Build alternatif
-
-# === NODE.JS ===
-node_modules/           # Dépendances npm
-npm-debug.log*          # Logs npm debug
-yarn-debug.log*         # Logs yarn debug
-yarn-error.log*         # Logs yarn erreur
-pnpm-debug.log*         # Logs pnpm debug
-lerna-debug.log*        # Logs lerna debug
-
-# === LOGS ===
-logs/                   # Dossier de logs
-*.log                   # Tous les fichiers de logs
+node_modules/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-# === ENVIRONNEMENT ===
-.env                    # Variables d'environnement
-.env.local              # Variables d'environnement locales
-.env.development.local  # Variables d'environnement dev
-.env.test.local         # Variables d'environnement test
-.env.production.local   # Variables d'environnement prod
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
 
-# === CACHE ET TEMP ===
-.cache/                 # Cache général
-.parcel-cache/          # Cache Parcel
-.vite/                  # Cache Vite
-.turbo/                 # Cache Turbo
-node_modules/.cache/    # Cache npm dans node_modules
-.eslintcache            # Cache ESLint
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
 
-# === COVERAGE ET TESTS ===
-coverage/               # Rapports de couverture de tests
-*.coverage              # Fichiers de couverture
-.nyc_output/            # Output NYC (couverture)
-.vitest/                # Cache Vitest
+.cache/
+.parcel-cache/
+.vite/
+.turbo/
+node_modules/.cache/
+.eslintcache
 
-# === ÉDITEURS ET IDE ===
+coverage/
+*.coverage
+.nyc_output/
+.vitest/
 
-# Visual Studio Code
-.vscode/                # Config VS Code (optionnel, voir note ci-dessous)
-*.code-workspace        # Workspace VS Code
+.vscode/
+*.code-workspace
 
-# IntelliJ / WebStorm
-.idea/                  # Config JetBrains
-*.iml                   # Fichiers modules IntelliJ
-*.ipr                   # Fichiers projet IntelliJ
-*.iws                   # Fichiers workspace IntelliJ
+.idea/
+*.iml
+*.ipr
+*.iws
 
-# Sublime Text
-*.sublime-project       # Projets Sublime
-*.sublime-workspace     # Workspace Sublime
+*.sublime-project
+*.sublime-workspace
 
-# === COVERAGE ET TESTS ===
-coverage/               # Rapports de couverture de tests
-*.coverage              # Fichiers de couverture
-.nyc_output/            # Output NYC (couverture)
-.vitest/                # Cache Vitest
+coverage/
+*.coverage
+.nyc_output/
+.vitest/
 
-# === ÉDITEURS ET IDE ===
+.vscode/
+*.code-workspace
 
-# Visual Studio Code
-.vscode/                # Config VS Code (optionnel, voir note ci-dessous)
-*.code-workspace        # Workspace VS Code
-
-# Si vous utilisez des fichiers de lock alternatifs:
-yarn.lock              # Si vous utilisez npm
-package-lock.json      # Si vous utilisez yarn
-pnpm-lock.yaml         # Si vous utilisez npm/yarn
+yarn.lock
+package-lock.json
+pnpm-lock.yaml

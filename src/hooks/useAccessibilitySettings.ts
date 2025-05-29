@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import { applyAccessibilityStyles } from '@/utils/styleUtils';
-import type { AccessibilitySettings, UseAccessibilitySettingsReturn } from '@/types';
+import { applyAccessibilityStyles } from '../utils/styleUtils';
+import type { AccessibilitySettings, UseAccessibilitySettingsReturn } from '../types';
 
 export const useAccessibilitySettings = (
   defaultSettings: Partial<AccessibilitySettings> = {}

@@ -1,4 +1,4 @@
-import type { AccessibilitySettings } from '@/types';
+import type { AccessibilitySettings } from '../types';
 
 export const applyAccessibilityStyles = (settings: AccessibilitySettings): void => {
   const root = document.documentElement;
