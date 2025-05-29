@@ -115,8 +115,8 @@ function App() {
         defaultSettings={settings}
         onSettingsChange={handleSettingsChange}
         customStyles={{
-          fab: {
-            backgroundColor: '#1976d2'
+          textLink: {
+            position: 'fixed'
           }
         }}
       />

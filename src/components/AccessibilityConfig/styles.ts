@@ -25,20 +25,8 @@ export interface MaterialStyles {
 
 export const materialStyles: MaterialStyles = {
   textLink: {
-    position: 'fixed',
-    color: '#1976d2',
-    textDecoration: 'underline',
     cursor: 'pointer',
     zIndex: 1000,
-    backgroundColor: 'transparent',
-    border: 'none',
-    padding: '8px',
-    fontSize: '14px',
-    fontFamily: 'Arial, sans-serif',
-    transition: 'color 0.3s',
-    '&:hover': {
-      color: '#1565c0'
-    }
   },
   overlay: {
     position: 'fixed',
