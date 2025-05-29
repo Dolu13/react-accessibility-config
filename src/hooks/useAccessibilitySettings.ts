@@ -65,7 +65,6 @@ export const useAccessibilitySettings = (
       font: 'default',
       lineHeight: 'default',
       alignment: 'left',
-      ...defaultSettings
     };
     setSettings(resetDefaults);
   };
