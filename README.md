@@ -86,11 +86,10 @@ interface AccessibilitySettings {
 ## 🎨 Personnalisation avancée
 
 ```tsx
-import React, { useState } from 'react';
-import { AccessibilityConfig } from '@dolu13/react-accessibility-config';
-import '@dolu13/react-accessibility-config/styles';
+import { useState } from 'react';
+import { AccessibilityConfig, useAccessibilityStyles } from '@dolu13/react-accessibility-config';
 
-function App() {
+const App = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [settings, setSettings] = useState({
     contrast: 'default',
@@ -98,31 +97,30 @@ function App() {
     lineHeight: 'default',
     alignment: 'left'
   });
+  useAccessibilityStyles(settings);
 
-  const handleSettingsChange = (newSettings) => {
+
+
+  const handleSettingsChange = (newSettings: any) => {
     setSettings(newSettings);
-    // Sauvegarder les paramètres dans le localStorage
-    localStorage.setItem('accessibilitySettings', JSON.stringify(newSettings));
   };
 
   return (
     <div>
+
       <AccessibilityConfig
         isOpen={isOpen}
         onToggle={() => setIsOpen(!isOpen)}
-        position="bottom-right"
-        theme="dark"
+        position="top-left"
+        theme="default" 
         defaultSettings={settings}
         onSettingsChange={handleSettingsChange}
-        customStyles={{
-          textLink: { // libelle du bouton d'ouverture de la modale
-            position: 'fixed'
-          }
-        }}
       />
     </div>
   );
-}
+};
+
+export default App;
 ```
 
 ## 🧪 Tests
