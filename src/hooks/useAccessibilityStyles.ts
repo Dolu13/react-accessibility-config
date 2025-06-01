@@ -3,145 +3,195 @@ import type { AccessibilitySettings } from '../types';
 
 export const useAccessibilityStyles = (settings: AccessibilitySettings) => {
   useEffect(() => {
-    // Créer ou mettre à jour la feuille de style
     const styleId = 'react-accessibility-config-styles';
     let styleElement = document.getElementById(styleId) as HTMLStyleElement;
-    
+
     if (!styleElement) {
       styleElement = document.createElement('style');
       styleElement.id = styleId;
       document.head.appendChild(styleElement);
     }
 
-    // Générer les styles CSS en fonction des paramètres
+    // Styles communs pour les modes contraste élevé et inversé (basé sur le CSS fourni)
+    const commonContrastStyles = `
+      border-image: none !important;
+      text-shadow: none !important;
+    `;
+
+    // Styles pour les éléments focusables en modes contraste (basé sur le CSS fourni)
+    const focusContrastStyles = `
+      ${settings.contrast === 'high' ? `
+        outline: 2px solid #00FFFF !important; /* Cyan pour Renforcer */
+      ` : settings.contrast === 'inverted' ? `
+        outline: 2px solid #FFFF00 !important; /* Jaune pour Inverser */
+      ` : ''}
+    `;
+
     const styles = `
       /* Styles globaux pour l'application */
       * {
-        /* Contraste */
+        /* Contraste (basé sur le CSS fourni) */
         ${settings.contrast === 'high' ? `
-          color: #000000 !important;
-          background-color: #ffffff !important;
+          background-color: #343643 !important; /* Gris foncé pour Renforcer (basé sur votre image et le CSS fourni) */
+          color: white !important; /* Texte blanc pour Renforcer */
+          text-decoration-color: currentColor !important;
+          border-color: white !important; /* Bordures blanches pour Renforcer */
         ` : settings.contrast === 'inverted' ? `
-          color: #ffffff !important;
-          background-color: #000000 !important;
+          background-color: #000080 !important; /* Bleu marine pour Inverser */
+          color: #FFFF00 !important; /* Jaune pour Inverser */
+          text-decoration-color: currentColor !important;
+          border-color: #FFFF00 !important; /* Bordures jaunes pour Inverser */
         ` : ''}
+        ${settings.contrast !== 'default' ? commonContrastStyles : ''}
 
-        /* Police */
+        /* Police (Dyslexie) - basé sur le CSS fourni */
         ${settings.font === 'dyslexic' ? `
-          font-family: 'OpenDyslexic', Arial, sans-serif !important;
+          font-family: 'opendys', Arial, sans-serif !important;
         ` : ''}
 
-        /* Interlignage */
+        /* Interlignage - basé sur le CSS fourni */
         ${settings.lineHeight === 'increased' ? `
-          line-height: 1.8 !important;
+          line-height: 1.5 !important;
         ` : ''}
 
-        /* Alignement */
+        /* Alignement - basé sur le CSS fourni */
         ${settings.alignment === 'right' ? `
           text-align: right !important;
+        ` : settings.alignment === 'left' ? ` /* Ajout pour alignement à gauche */
+          text-align: left !important;
         ` : ''}
       }
 
-      /* Styles spécifiques pour les liens */
-      a {
-        ${settings.contrast === 'high' ? `
-          color: #0000EE !important;
-        ` : settings.contrast === 'inverted' ? `
-          color: #00FFFF !important;
+      /* Let SVG elements adapt to the chosen color scheme (from provided CSS) */
+      path,
+      polygon,
+      svg,
+      svg * {
+        ${settings.contrast !== 'default' ? 'fill: currentColor !important;' : ''}
+      }
+
+      /* Add a border on form elements when custom contrasts are on (from provided CSS) */
+      input,\n      textarea,\n      select,\n      button {
+        ${settings.contrast !== 'default' ? `
+          border-width: 1px !important;\n          border-style: solid !important;
         ` : ''}
       }
 
-      a:visited {
+      /* Placeholder styles for contrast modes (from provided CSS) */
+      *::-webkit-input-placeholder { /* Chrome/Opera/Safari */
         ${settings.contrast === 'high' ? `
-          color: #551A8B !important;
+          color: white !important;
         ` : settings.contrast === 'inverted' ? `
-          color: #FF00FF !important;
+          color: #FFFF00 !important;
         ` : ''}
       }
 
-      /* Styles pour les boutons */
-      button {
+      *::-moz-placeholder { /* Firefox 19+ */
         ${settings.contrast === 'high' ? `
-          color: #000000 !important;
-          background-color: #ffffff !important;
-          border-color: #000000 !important;
+          color: white !important;
+          opacity: 1 !important;
         ` : settings.contrast === 'inverted' ? `
-          color: #ffffff !important;
-          background-color: #000000 !important;
-          border-color: #ffffff !important;
+          color: #FFFF00 !important;
+          opacity: 1 !important;
         ` : ''}
       }
 
-      /* Styles pour les inputs */
-      input, textarea, select {
+      *:-ms-input-placeholder { /* IE 10+ */
         ${settings.contrast === 'high' ? `
-          color: #000000 !important;
-          background-color: #ffffff !important;
-          border-color: #000000 !important;
+          color: white !important;
         ` : settings.contrast === 'inverted' ? `
-          color: #ffffff !important;
-          background-color: #000000 !important;
-          border-color: #ffffff !important;
+          color: #FFFF00 !important;
         ` : ''}
       }
 
-      /* Styles pour les titres */
-      h1, h2, h3, h4, h5, h6 {
+      *:-moz-placeholder { /* Firefox 18- */
         ${settings.contrast === 'high' ? `
-          color: #000000 !important;
+          color: white !important;
+          opacity: 1 !important;
         ` : settings.contrast === 'inverted' ? `
-          color: #ffffff !important;
+          color: #FFFF00 !important;
+          opacity: 1 !important;
         ` : ''}
       }
 
-      /* Styles pour les paragraphes */
-      p {
+      /* Styles for input[type="date"] in contrast modes (from provided CSS) */
+      *::-webkit-datetime-edit-text,
+      *::-webkit-datetime-edit-month-field,
+      *::-webkit-datetime-edit-day-field,
+      *::-webkit-datetime-edit-year-field {
         ${settings.contrast === 'high' ? `
-          color: #000000 !important;
+          color: white !important;
         ` : settings.contrast === 'inverted' ? `
-          color: #ffffff !important;
+          color: #FFFF00 !important;
         ` : ''}
       }
 
-      /* Styles pour les listes */
-      ul, ol {
+      ::-webkit-calendar-picker-indicator {
         ${settings.contrast === 'high' ? `
-          color: #000000 !important;
+          background: #343643 !important;
         ` : settings.contrast === 'inverted' ? `
-          color: #ffffff !important;
+          background: #000080 !important;
         ` : ''}
       }
 
-      /* Styles pour les tableaux */
-      table {
+      /* Styles for input[type="range"] in contrast modes (from provided CSS) */
+      input[type="range"]::-webkit-slider-runnable-track {
         ${settings.contrast === 'high' ? `
-          color: #000000 !important;
-          background-color: #ffffff !important;
-          border-color: #000000 !important;
+          background: white !important;
         ` : settings.contrast === 'inverted' ? `
-          color: #ffffff !important;
-          background-color: #000000 !important;
-          border-color: #ffffff !important;
+          background: #FFFF00 !important;
         ` : ''}
       }
 
-      /* Styles pour les cellules de tableau */
-      td, th {
+      input[type="range"]::-moz-range-track {
         ${settings.contrast === 'high' ? `
-          color: #000000 !important;
-          background-color: #ffffff !important;
-          border-color: #000000 !important;
+          background: white !important;
         ` : settings.contrast === 'inverted' ? `
-          color: #ffffff !important;
-          background-color: #000000 !important;
-          border-color: #ffffff !important;
+          background: #FFFF00 !important;
         ` : ''}
+      }
+      input[type="range"]::-moz-range-thumb {
+        ${settings.contrast === 'high' ? `
+          background: black !important;
+          border: .15em solid white !important;
+        ` : settings.contrast === 'inverted' ? `
+          background: #000080 !important;
+          border: .15em solid #FFFF00 !important;
+        ` : ''}
+      }
+
+      input[type="range"]::-ms-fill-lower,
+      input[type="range"]::-ms-fill-upper {
+        ${settings.contrast === 'high' ? `
+          background: white !important;
+        ` : settings.contrast === 'inverted' ? `
+          background: #FFFF00 !important;
+        ` : ''}
+      }
+
+      input[type="range"]:focus::-ms-fill-lower,
+      input[type="range"]:focus::-ms-fill-upper {
+         ${settings.contrast === 'high' ? `
+          background: white !important;
+        ` : settings.contrast === 'inverted' ? `
+          background: #FFFF00 !important;
+        ` : ''}
+      }
+
+      input[type="range"]::-ms-thumb {
+        ${settings.contrast === 'high' ? `
+          background: black !important;\n          border: .15em solid white !important;\n        ` : settings.contrast === 'inverted' ? `
+          background: #000080 !important;\n          border: .15em solid #FFFF00 !important;\n        ` : ''}
+      }
+
+      /* Styles pour les éléments focusables (basé sur le CSS fourni) */
+      *:focus {
+        ${settings.contrast !== 'default' ? focusContrastStyles : ''}
       }
     `;
 
     styleElement.textContent = styles;
 
-    // Nettoyage lors du démontage
     return () => {
       if (styleElement && styleElement.parentNode) {
         styleElement.parentNode.removeChild(styleElement);
